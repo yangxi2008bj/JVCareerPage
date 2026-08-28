@@ -1,12 +1,21 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { jobs, filters, company, news } from './data.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// React build output (frontend/dist). backend/ and frontend/ are siblings.
+const staticDir = path.resolve(__dirname, '../frontend/dist');
+
 app.use(cors());
 app.use(express.json());
+
+// Serve the compiled React app (static assets like JS/CSS/images).
+app.use(express.static(staticDir));
 
 // Return available filter options
 app.get('/api/filters', (req, res) => {
@@ -198,6 +207,13 @@ app.post('/api/auth/oauth/:provider/verify', (req, res) => {
     token: 'mock-session-' + Date.now(),
     user: { name: p.profile.name, email: p.profile.email, provider: key },
   });
+});
+
+// SPA fallback: any non-API GET request returns index.html so that
+// client-side (React Router) routes work on direct load / refresh.
+app.use((req, res, next) => {
+  if (req.method !== 'GET' || req.path.startsWith('/api/')) return next();
+  res.sendFile(path.join(staticDir, 'index.html'));
 });
 
 app.listen(PORT, () => {

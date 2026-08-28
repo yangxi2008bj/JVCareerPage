@@ -5,5 +5,5 @@ services:
     branch: main
     region: oregon
     plan: free
-    buildCommand: npm install --prefix backend && npm install --include=dev --prefix frontend && npm run build --prefix frontend
-    startCommand: npm start --prefix backend
+    buildCommand: npm run build
+    startCommand: npm start

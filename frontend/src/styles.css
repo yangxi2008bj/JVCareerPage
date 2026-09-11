@@ -330,13 +330,13 @@ a {
   margin: 0 0 14px;
 }
 .filter-toggle-icon {
-  font-size: 18px;
-  line-height: 1;
-  color: #666;
+  color: #222;
   margin-bottom: 14px;
-  width: 18px;
-  text-align: center;
-  user-select: none;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.filter-toggle-icon.is-expanded {
+  transform: rotate(180deg);
 }
 .filter-group-head:hover .filter-toggle-icon {
   color: var(--accent);

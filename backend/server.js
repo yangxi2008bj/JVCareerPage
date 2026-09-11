@@ -100,20 +100,30 @@ app.post('/api/auth/login', (req, res) => {
 // Flow: authorize -> provider consent screen -> callback (code) -> exchange
 //       code for an access token -> fetch the verified user profile.
 // ---------------------------------------------------------------------------
+// Consent screens share a red theme; each provider keeps its real brand logo.
+const BRAND_RED = '#d93025';
+const LOGOS = {
+  google: `<svg width="46" height="46" viewBox="0 0 48 48" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`,
+  linkedin: `<svg width="44" height="44" viewBox="0 0 24 24" aria-label="LinkedIn"><rect width="24" height="24" rx="3" fill="#0A66C2"/><path fill="#fff" d="M6.94 8.5H4.4V17h2.54V8.5zM5.67 7.4a1.47 1.47 0 100-2.94 1.47 1.47 0 000 2.94zM19.6 17v-4.66c0-2.5-1.34-3.66-3.12-3.66-1.44 0-2.08.79-2.44 1.35V8.5h-2.54V17h2.54v-4.5c0-1.2.86-1.53 1.44-1.53s1.3.44 1.3 1.55V17h2.82z"/></svg>`,
+  facebook: `<svg width="44" height="44" viewBox="0 0 24 24" aria-label="Facebook"><path fill="#1877F2" d="M24 12a12 12 0 10-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95h-1.51c-1.49 0-1.95.92-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0024 12z"/></svg>`,
+};
 const OAUTH_PROVIDERS = {
   google: {
     label: 'Google',
-    color: '#4285F4',
+    color: BRAND_RED,
+    logo: LOGOS.google,
     profile: { name: 'Jordan Miller', email: 'jordan.miller@gmail.com' },
   },
   linkedin: {
     label: 'LinkedIn',
-    color: '#0a94c4',
+    color: BRAND_RED,
+    logo: LOGOS.linkedin,
     profile: { name: 'Jordan Miller', email: 'jordan.miller@linkedin.com' },
   },
   facebook: {
     label: 'Facebook',
-    color: '#3b5998',
+    color: BRAND_RED,
+    logo: LOGOS.facebook,
     profile: { name: 'Jordan Miller', email: 'jordan.miller@facebook.com' },
   },
 };
@@ -145,6 +155,8 @@ app.get('/api/auth/oauth/:provider/consent', (req, res) => {
   body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#f5f5f5;margin:0;
     display:flex;align-items:center;justify-content:center;min-height:100vh}
   .box{background:#fff;width:340px;padding:32px 28px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.12);text-align:center}
+  .logo{margin-bottom:10px;line-height:0}
+  .logo svg{display:inline-block}
   .brand{font-size:20px;font-weight:700;color:${p.color};margin-bottom:6px}
   h1{font-size:16px;margin:14px 0 4px;color:#222}
   p{font-size:13px;color:#666;line-height:1.5}
@@ -157,7 +169,7 @@ app.get('/api/auth/oauth/:provider/consent', (req, res) => {
   .scope{font-size:12px;color:#999;margin-top:14px}
 </style></head>
 <body><div class="box">
-  <div class="brand">${p.label}</div>
+  <div class="logo">${p.logo}</div>
   <h1>Sign in to continue to TikTok USDS</h1>
   <p>TikTok USDS Careers wants to access your ${p.label} account.</p>
   <div class="u"><b>${p.profile.name}</b><span>${p.profile.email}</span></div>

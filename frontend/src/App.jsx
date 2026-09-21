@@ -8,6 +8,8 @@ import NewsroomPage from './pages/NewsroomPage.jsx';
 import ResumePage from './pages/ResumePage.jsx';
 import ApplicationsPage from './pages/ApplicationsPage.jsx';
 import FaqPage from './pages/FaqPage.jsx';
+import HiringProcessPage from './pages/HiringProcessPage.jsx';
+import InterviewTipsPage from './pages/InterviewTipsPage.jsx';
 import TeamPage from './pages/TeamPage.jsx';
 import DepartmentPage from './pages/DepartmentPage.jsx';
 import CulturePage from './pages/CulturePage.jsx';
@@ -27,7 +29,9 @@ export default function App() {
         <Route path="/usds/login" element={<LoginPage />} />
         <Route path="/usds/resume" element={<ResumePage />} />
         <Route path="/usds/applications" element={<ApplicationsPage />} />
-        <Route path="/usds/faq" element={<FaqPage />} />
+        <Route path="/usds/hiring-process" element={<HiringProcessPage />} />
+        <Route path="/usds/hiring-process/interview-tips" element={<InterviewTipsPage />} />
+        <Route path="/usds/hiring-process/faq" element={<FaqPage />} />
       </Routes>
     </div>
   );

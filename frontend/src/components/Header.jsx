@@ -4,16 +4,6 @@ import { useAuth } from '../AuthContext.jsx';
 
 const LOGO = '//sf16-sg.tiktokcdn.com/obj/eden-sg/0eh7lpquhpanuhf/20260408-171806.png';
 
-const TEAM_MENU = [
-  { name: 'R&D', slug: 'rd' },
-  { name: 'Product', slug: 'product' },
-  { name: 'Design', slug: 'design' },
-  { name: 'Marketing', slug: 'marketing' },
-  { name: 'Corporate Functions', slug: 'corporate-functions' },
-  { name: 'Operations', slug: 'operations' },
-  { name: 'Sales', slug: 'sales' },
-];
-
 export default function Header() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -48,21 +38,21 @@ export default function Header() {
         <nav className="nav">
           <NavLink to="/company">Company</NavLink>
           <NavLink to="/newsroom">Newsroom</NavLink>
-          <div className="nav-item-dropdown">
-            <NavLink to="/usds/team">Team</NavLink>
-            <div className="nav-submenu">
-              {TEAM_MENU.map((team) => (
-                <Link key={team.slug} to={`/usds/team/${team.slug}`}>
-                  {team.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-          <NavLink to="/usds/culture">Culture</NavLink>
+          <NavLink to="/usds/team">Team</NavLink>
+          <NavLink to="/usds/culture">Our Ways of Working</NavLink>
           <NavLink to="/" end className="nav-jobs">
             Jobs
           </NavLink>
-          <NavLink to="/usds/faq">FAQ</NavLink>
+          <div className="nav-item-dropdown">
+            <NavLink to="/usds/hiring-process">Hiring Process</NavLink>
+            <div className="nav-submenu">
+              <NavLink to="/usds/hiring-process" end>
+                Apply to TikTok USDS JV
+              </NavLink>
+              <NavLink to="/usds/hiring-process/interview-tips">Interview Tips</NavLink>
+              <NavLink to="/usds/hiring-process/faq">FAQ</NavLink>
+            </div>
+          </div>
           {user ? (
             <div className="user-menu" ref={menuRef}>
               <button

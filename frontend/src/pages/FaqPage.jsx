@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.jsx';
 
-const HERO_IMG =
-  'https://cdn.sanity.io/images/sq5fussn/production/960820b18b5eaf8f3a647ec5b44e589d3ae0420a-1030x401.png?auto=format&fit=max&w=3840';
+const JOBS = '/';
+const INTERVIEW_TIPS = '/usds/hiring-process/interview-tips';
 
 const FAQ_DATA = [
   {
@@ -10,47 +11,38 @@ const FAQ_DATA = [
     title: 'General Information',
     items: [
       {
-        q: "What's the working culture like?",
-        a: [
-          'TikTok is committed to championing diversity and fostering a culture of inclusion among our global teams. At TikTok, our mission is to inspire creativity and bring joy. To achieve that goal, we are committed to celebrating the diverse voices among us and building an organization that reflects the diversity of our in-app communities. We believe individuals should not be marginalized because of their background or identity, but instead be considered based on their strengths and experience.',
-        ],
-      },
-      {
         q: 'Where are your offices, and where can I work?',
         a: [
-          'TikTok has global offices in many cities, including Los Angeles, New York, London, Paris, Berlin, Dubai, Singapore, Jakarta, Seoul, and Tokyo. For more information, please visit our jobs page.',
+          <>
+            TikTok USDS Joint Venture has offices in cities around the world, including Los Angeles,
+            New York, London, and Sydney. Please visit our <Link to={JOBS}>jobs page</Link> to see
+            each location's openings.
+          </>,
         ],
       },
       {
-        q: 'Do you have any early careers positions? How can I apply and when?',
-        a: ['Yes, we provide many early careers opportunities. Please check out our Students & Grads page.'],
-      },
-      {
-        q: 'Do you hire contractors / third-party associates?',
+        q: 'Do you have any early career positions? How can I apply and when?',
         a: [
-          'In some cases, we may offer a fixed term contract for the positions we have posted on our careers site. Roles and requirements vary by region and we do typically hire third party associates via our contracted vendors.',
+          <>
+            Yes, we provide many early career opportunities. Please check out our{' '}
+            <Link to={JOBS}>jobs page</Link>.
+          </>,
         ],
       },
       {
         q: 'Do you offer relocation support?',
         a: [
-          "It's discussed case by case, but we do provide relocation support for those who need to relocate based on the location of the role. We recommend that you check in on this should the application process proceeds.",
+          'We evaluate relocation support on a case-by-case basis and only provide it when the role requires it. We encourage you to discuss this with your recruiter as the process moves forward.',
         ],
       },
       {
         q: 'Do I need work authorization for my position?',
-        a: ['Yes, candidates are required to have work authorization for the country they are applying for.'],
+        a: ["Yes, candidates must have work authorization in the country they're applying."],
       },
       {
-        q: 'Do you offer VISA sponsorship?',
+        q: 'Do you offer visa sponsorship?',
         a: [
-          "There are jobs where the company may be able to offer sponsorship, depending on the requirements of the job and qualifications of the candidate. If the role is appropriate for visa sponsorship and you're qualified for the job, the recruiter will inform you how to proceed with the interview process.",
-        ],
-      },
-      {
-        q: 'Can I work remotely?',
-        a: [
-          'It varies by region and depends on the specific job requirements. You may apply first and further communicate with HR during the interview process.',
+          "Some roles may be eligible for sponsorship, depending on the position's requirements and the candidate's qualifications. If the role qualifies and you're a strong fit, your recruiter will explain how to proceed.",
         ],
       },
     ],
@@ -62,7 +54,7 @@ const FAQ_DATA = [
       {
         q: 'Do you require a cover letter?',
         a: [
-          'No, we do not require a cover letter in the application process. However, creating a cover letter can be a useful exercise to develop your skills. It may be useful to bring up anything that would not be evident from the rest of your application.',
+          'No, we do not require a cover letter in the application process. However, writing one can be a helpful way to highlight anything not already evident in your application.',
         ],
       },
       {
@@ -73,17 +65,21 @@ const FAQ_DATA = [
       },
       {
         q: 'What file format do you require for my CV/resume?',
-        a: ['A pdf file is highly recommended. We also accept doc, docx, ppt, pptx, png, jpg and jpeg.'],
+        a: [
+          'A .pdf file is highly recommended. We also accept .doc, .docx, .ppt, .pptx, .html, .png, .jpg and .jpeg.',
+        ],
       },
       {
         q: 'What language do you require for my CV/resume?',
         a: [
-          'As we have interviewers that could be located in different parts of the world, English is the preferred language for your CV/resume.',
+          'Since our interviewers are based around the world, English is the preferred language for your CV/resume.',
         ],
       },
       {
         q: 'Can I update my CV/resume after submitting my application?',
-        a: ['Yes, you can update your CV/resume under "My resume" by logging onto our careers website.'],
+        a: [
+          'Yes, you can update your CV/resume under "My resume" by logging into our careers website.',
+        ],
       },
     ],
   },
@@ -94,7 +90,12 @@ const FAQ_DATA = [
       {
         q: 'Where can I find the vacancies?',
         a: [
-          'Any vacancies we have are posted on our jobs page. Please select your desired job category and/or location and the list would appear so please click each job title for more details. To apply, candidates need to create an account on our careers site, using one of the log in options we provide.',
+          <>
+            Any vacancies we have are posted on our <Link to={JOBS}>jobs page</Link>. Select your
+            desired job category and/or location to see the matching openings, and click each job
+            title for more details. To apply, candidates need to create an account on our careers
+            site using one of the login options we provide.
+          </>,
         ],
       },
       {
@@ -106,33 +107,45 @@ const FAQ_DATA = [
       {
         q: 'Is there an application deadline?',
         a: [
-          "Generally no, if a job is published on our careers site, it's open for applications. For early careers, there might be application deadlines. Please check out the details in our Students & Grads page.",
+          <>
+            Generally, no. If a job is published on our careers site, it's open for applications. For
+            early careers, there may be application deadlines. Please check out the details on our{' '}
+            <Link to={JOBS}>jobs page</Link>.
+          </>,
         ],
       },
       {
         q: 'How many jobs am I allowed to apply for?',
         a: [
-          'While you can apply for multiple positions, we recommend you take a targeted approach selecting only the opportunities most relevant for your skillset.',
-          'For early careers, you may only apply for up to two positions within the application time frame. Please check out the details here.',
+          'While you can apply for multiple positions, we recommend you take a targeted approach and select only the opportunities most relevant for your skill set.',
         ],
       },
       {
         q: 'I interviewed/applied for a job last year, may I reapply?',
         a: [
-          'Yes, we generally recommend a 6-month gap between applications for the same role. New positions are continually being created, so please check our jobs page at regular intervals for new roles.',
+          <>
+            Yes, we generally recommend a 6-month gap between applications for the same role. New
+            positions are continually being created, so please check our{' '}
+            <Link to={JOBS}>jobs page</Link> regularly.
+          </>,
         ],
       },
       {
-        q: 'How can I check my application status?',
+        q: 'How can I check my application status? Will you inform me if it changes?',
         a: [
           'Due to the high volume of applications, we are unable to respond to every applicant. You can check your application status under "My applications" after logging in to our careers website. If HR considers your profile a good fit, they will reach out to you.',
           'Please note that applications made through third-party job platforms will not be shown under "My applications" on our careers site.',
         ],
       },
       {
-        q: 'What should I do if I face technical difficulties when submitting my applications on careers site?',
+        q: 'What should I do if I face technical difficulties when submitting my applications on the careers site?',
         a: [
-          "It may be a network hiccup that can be addressed by refreshing your browser or resetting your phone for better internet or reception coverage. If these steps don't help, please reach out to website-support@tiktok.com.",
+          <>
+            It may be a network hiccup that can be addressed by refreshing your browser or moving to
+            a location with a stronger internet connection. If these steps don't help, please reach
+            out to{' '}
+            <a href="mailto:website-support@tiktokusds.com">website-support@tiktokusds.com</a>.
+          </>,
         ],
       },
     ],
@@ -144,25 +157,29 @@ const FAQ_DATA = [
       {
         q: 'What does the interview process include? Are there any psychometric or technical tests?',
         a: [
-          'The interview process varies depending on the team and the role. It is common for an assessment, test, or task (usually for technical roles) to be part of the process as well as 3-5 rounds of interviews. Your recruiter will inform you of the specific process for the role you have applied for.',
+          'The interview process varies depending on the team and the role. The process commonly includes 3-5 rounds of interviews, and often an assessment, test, or task (usually for technical roles). Your recruiter will inform you of the specific process for the role you have applied for.',
         ],
       },
       {
         q: 'How do I prepare for an interview?',
         a: [
-          'Interviews may vary depending on the team and the role. Our interview tips for students and fresh graduates might also be helpful for you.',
+          <>
+            Interviews may vary depending on the team and the role. Our{' '}
+            <Link to={INTERVIEW_TIPS}>interview tips</Link> for students and fresh graduates might
+            also be helpful for you.
+          </>,
         ],
       },
       {
         q: 'Can I change my interview schedule?',
         a: [
-          "Changing your interview time could cause a delay in the process, so please attend when you are scheduled if possible. But we do understand things happen! Please notify your HR ahead of time if that's the case and you need to reschedule.",
+          'Changing your interview time could cause a delay in the process, so please show up when you are scheduled, if possible. We do understand things happen. Please notify your recruiter ahead of time if you need to reschedule.',
         ],
       },
       {
         q: 'What should I wear for the interview?',
         a: [
-          'We care more about your ability to perform the job rather than how you dress. Please feel at ease to wear whatever you feel comfortable. We have an inclusive environment!',
+          'We care more about your ability to perform the job than how you dress. Please feel free to wear whatever makes you feel comfortable.',
         ],
       },
       {
@@ -174,7 +191,7 @@ const FAQ_DATA = [
       {
         q: 'What is the timeline for interviews?',
         a: [
-          'Most of our interviews take place on a rolling basis. From submitting your resume to receiving an offer, the recruiting process lasts one month in most cases. There are, of course, exceptions which could mean we are sometimes a bit longer or even quicker.',
+          'Most of our interviews take place on a rolling basis. From submitting your resume to receiving an offer, the recruiting process lasts one month in most cases. Naturally, there are exceptions that can make the process a little longer, or even quicker.',
         ],
       },
       {
@@ -187,13 +204,13 @@ const FAQ_DATA = [
       {
         q: 'Will you inform me if I am not selected?',
         a: [
-          'Due to the high volume of applications, we are unable to respond to every applicant. If you are already in the interview process, you will receive a call or notification from your recruiter notifying you that you have not been selected.',
+          'Due to the high volume of applications, we are unable to respond to every applicant. If you are already in the interview process, your recruiter will contact you with an update on your status.',
         ],
       },
       {
         q: "I've received the candidate survey. Does that mean I am or am not selected?",
         a: [
-          "Receiving the candidate survey is not indicative of the status of your recruitment process. In order to keep improving our candidate experience, it's important for us to receive feedback from all applicants.",
+          "Receiving the candidate survey does not indicate the status of your application. To keep improving our candidate experience, it's important for us to receive feedback from all applicants.",
         ],
       },
     ],
@@ -228,8 +245,8 @@ export default function FaqPage() {
 
   return (
     <>
-      <div className="faq-hero" style={{ backgroundImage: `url("${HERO_IMG}")` }}>
-        <span className="faq-hero-title">FAQ</span>
+      <div className="faq-hero">
+        <span className="faq-hero-title">Frequently Asked Questions</span>
       </div>
 
       <div className="faq-page">

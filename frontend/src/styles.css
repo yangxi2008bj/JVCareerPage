@@ -1573,6 +1573,7 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
+  align-items: start;
 }
 .process-card {
   background: #f4f4f5;

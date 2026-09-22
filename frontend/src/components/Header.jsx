@@ -32,13 +32,21 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-inner">
-        <Link className="logo" to="/company">
+        <a className="logo" href="https://usdsjv.tiktok.com/" target="_blank" rel="noopener noreferrer">
           <img src={LOGO} alt="TikTok USDS" />
-        </Link>
+        </a>
         <nav className="nav">
-          <NavLink to="/company">Company</NavLink>
-          <NavLink to="/newsroom">Newsroom</NavLink>
-          <NavLink to="/usds/team">Team</NavLink>
+          <a href="https://usdsjv.tiktok.com/" target="_blank" rel="noopener noreferrer">
+            Company
+          </a>
+          <a
+            href="https://usdsjv.tiktok.com/newsroom"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Newsroom
+          </a>
+          <NavLink to="/usds/team">Teams</NavLink>
           <NavLink to="/usds/culture">Our Ways of Working</NavLink>
           <NavLink to="/" end className="nav-jobs">
             Jobs

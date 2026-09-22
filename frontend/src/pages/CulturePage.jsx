@@ -186,13 +186,13 @@ export default function CulturePage() {
       <section className="culture-body">
         <div className="container culture-body-inner">
           <nav className="culture-nav">
-            <a href="#bytestyle">ByteStyle</a>
+            <a href="#bytestyle">Culture</a>
             <a href="#leadership">Leadership Principles</a>
           </nav>
 
           <div className="culture-content">
             <div className="culture-panel" id="bytestyle">
-              <h2>ByteStyle</h2>
+              <h2>Culture</h2>
               <Accordion items={BYTESTYLE} defaultOpen={0} />
             </div>
 
